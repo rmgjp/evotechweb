@@ -8,6 +8,10 @@ const session = require('express-session');
 //inicializaciones
 const app = express();
 require('./database');
+app.use('/css', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/css')))
+app.use('/js', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js')))
+app.use('/js', express.static(path.join(__dirname, 'node_modules/jquery/dist')))
+
 
 //settings
 app.set('port',process.env.PORT || 3000);
@@ -33,6 +37,7 @@ app.use(session({
 
 //mas rutas...
 app.use(require('./routes/index'));
+//app.use(require('./img/'));
 app.use(require('./routes/users'));
 app.use(require('./routes/pagos'));
 app.use(require('./routes/articulos'));

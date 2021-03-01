@@ -5,6 +5,6 @@ router.get('/users/signin', ((req, res) =>
             res.send('Ingresando')));
 
 router.get('/users/signup', ((req, res) =>
-    res.send('Autenticando')));
+    res.render('users/signup')));
 
 module.exports = router;
