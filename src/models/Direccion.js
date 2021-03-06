@@ -6,7 +6,7 @@ const {Schema} = mongoose;
 
 const DireccionSchema = new Schema({
     //_id: mongoose.Schema.Types.ObjectId,
-    idUsuario: {type: ObjectId, required: true, ref: 'Usuario'},
+    //idUsuario: {type: ObjectId, required: true, ref: 'Usuario'},
     numero:{type: String, required:true},
     calle: {type: String, required: true},
     colonia: {type: String, required: true},
