@@ -8,44 +8,45 @@
 <head>
     <meta charset="UTF-8">
     <title>Agregar Articulo</title>
-    <link rel="stylesheet" href="css/bootstrap.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <!--Barra de busqueda -->
 </head>
 
 <body>
     <div class="container g-2 p-2 d-flex justify-content-center  align-items-center" >
-        <div class="card w-75 shadow-sm"  >
+        <div class="card w-75 shadow-sm" >
             <div class="row g-2 p-2">
                 <h2>Agregar un nuevo articulo</h2>
             </div>
-            <div class="row g-2 p-2" >
-
-                <div class="col">
-                    <div class="mb-3">
-                        <label for="Nombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" name="nombre" placeholder="">
+            <form class="row g-3 needs-validation" action="/articulos/articulo-guardado"  method="POST" novalidate>
+                <div class="row g-2 p-2">
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="Nombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" name="nombre" placeholder="">
+                        </div>
+                        <div class="mb-3">
+                            <label for="Precio" class="form-label">Precio</label>
+                            <input type="text" class="form-control" name="precio" placeholder="">
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="Precio" class="form-label">Precio</label>
-                        <input type="text" class="form-control" name="precio" placeholder="">
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="mb-3">
-                        <label for="Descripción" class="form-label">Descripción</label>
-                        <input type="text" class="form-control" name="descripcion" placeholder="">
-                    </div>
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="Descripción" class="form-label">Descripción</label>
+                            <input type="text" class="form-control" name="descripcion" placeholder="">
+                        </div>
 
                     <div class="mb-3">
                         <label for="Marca" class="form-label">Marca</label>
                         <input type="text" class="form-control" name="marca" placeholder="">
                     </div>
 
+                    </div>
+                    <div class="d-flex flex-row justify-content-end">
+                        <button class="btn btn-primary d-flex justify-content-start " type="submit">Guardar</button>
+                    </div>
                 </div>
-                <div class="d-flex flex-row justify-content-end" action="/articulos/ArticuloGuardado"  method="POST" novalidate>
-                    <button class="btn btn-primary d-flex justify-content-start " type="submit">Guardar</button>
-                </div>
-            </div>
+            </form>
         </div>
 
     </div>
