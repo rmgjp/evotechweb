@@ -5,6 +5,13 @@ const usuario = require('../models/Usuario');
 router.get('/users/signin', ((req, res) =>
             res.render('users/signin')));
 
+router.get('/users/account', ((req, res) =>
+    res.render('users/account')));
+
+router.post('/users/update', async (req, res) =>{
+
+});
+
 router.post('/users/Registro', async (req,res)=>{
     const {nombre,apellido,correo,password, password2} = req.body;
     const errors = [];
