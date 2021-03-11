@@ -4,8 +4,7 @@ const direccion = require('../models/Direccion');
 
 router.get('/direcciones', (req, res) => {
     res.render('direcciones/new-direccion')
-})
-
+});
 router.post('/direcciones/dir', async (req,res)=>{
     const {numero,calle,colonia,cp, ciudad,estado} = req.body;
     const errors = [];
