@@ -1,16 +1,26 @@
 const express = require('express');
 const router = express.Router();
 const articulo = require('../models/Articulo');
-
+const multer = require('multer');
+const storage = multer.diskStorage({
+    filename: (req, file, cb) =>{
+        destination:'./public/img',
+        cb(null,file.originalname);
+    }
+});
 router.get('/articulos/view-articulo', ((req, res) =>
     res.render('articulos/view-articulo')))
 
+router.use(multer({
+    storage:storage,
+    dest : 'src/public/img'
+}).single('imagen'));
 
 router.get('/articulos/new-articulo', ((req, res) =>
     res.render('articulos/new-articulo')))
 
-router.post('/articulos/articulo-guardado', async (req,res)=>{
-    const {nombre, precio, marca, descripcion} = req.body;
+router.post('/articulos/articulo-guardado',async (req,res)=>{
+    const {nombre, precio, marca, descripcion, categoria} = req.body;
     const errors = [];
     if(!nombre){
         errors.push({text: 'Por favor escribe un nombre'});
@@ -34,9 +44,18 @@ router.post('/articulos/articulo-guardado', async (req,res)=>{
         });
     }
     else{
-        const newArticulo = new articulo({nombre, descripcion, marca, precio});
-        await newArticulo.save();
-        console.log(newArticulo);
+
+        if(req.file){
+            //res.json(req.file);
+            //const {filename} = req.file.filename;
+            console.log(req.file);
+        }
+        else{
+            errors.push({text: 'Por favor escoge una imagen.'})
+        }
+        //const newArticulo = new articulo({nombre, descripcion, marca, precio, categoria, filename});
+        //await newArticulo.save();
+        //console.log(newArticulo);
         res.redirect('/');
     }
 });

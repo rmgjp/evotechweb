@@ -42,7 +42,13 @@ router.post('/users/Registro', async (req,res)=>{
         });
     }
     else{
-        const newUsuario = new usuario({nombre,apellido,correo, password});
+        const numero = '';
+        const calle = '';
+        const colonia = '';
+        const cp = '';
+        const ciudad = '';
+        const estado = '';
+        const newUsuario = new usuario({nombre,apellido,correo, password, numero, calle,colonia, cp,ciudad,estado});
         await newUsuario.save();
         console.log(newUsuario);
         res.redirect('/');

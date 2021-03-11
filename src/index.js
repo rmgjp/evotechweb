@@ -13,6 +13,7 @@ app.use('/js', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/
 app.use('/js', express.static(path.join(__dirname, 'node_modules/jquery/dist')))
 
 
+
 //settings
 app.set('port',process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
@@ -41,7 +42,7 @@ app.use(require('./routes/index'));
 app.use(require('./routes/users'));
 app.use(require('./routes/pagos'));
 app.use(require('./routes/articulos'));
-app.use(require('./routes/direcciones'));
+//app.use(require('./routes/direcciones'));
 
 //Static Files
 app.use(express.static(path.join(__dirname, 'public')));
