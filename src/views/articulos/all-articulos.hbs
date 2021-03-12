@@ -1,0 +1,17 @@
+<div class="container g-2 p-2">
+    <div class="row">
+        {{#each articulos}}
+            <div class="col-md-3">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{imagen}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{precio}}</h5>
+                        <p class="card-text">{{nombre}}</p>
+                        <a class="btn btn-primary" href="/producto/{{_id}}" >Ver producto</a>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>
+

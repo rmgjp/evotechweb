@@ -8,7 +8,7 @@ const ArticuloSchema = new Schema({
     marca : {type:String, required:true},
     categoria: {type:String, required: true},
     precio :{type:String, required: true},
-    foto:{type:String, required:true}
+    imagen:{type:String, required:true}
 });
 /**
 ArticuloSchema.methods.setFoto = function.setFoto(filename){
