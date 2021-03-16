@@ -1,11 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const direccion = require('../models/Direccion');
+const Usuario = require('../models/Usuario');
 
 router.get('/direcciones', (req, res) => {
     res.render('direcciones/new-direccion')
 });
-router.post('/direcciones/dir', async (req,res)=>{
+
+
+router.post('/add-direccion/:id', async (req,res)=>{
+
+    const usuario = await Usuario.findById(req.params.id).lean();
     const {numero,calle,colonia,cp, ciudad,estado} = req.body;
     const errors = [];
     if(!numero){
@@ -38,9 +42,9 @@ router.post('/direcciones/dir', async (req,res)=>{
         });
     }
     else{
-        const newDireccion = new direccion({numero,calle,colonia, cp,ciudad,estado});
-        await newDireccion.save();
-        console.log(newDireccion);
+        //const newDireccion = new direccion({numero,calle,colonia, cp,ciudad,estado});
+        //await newDireccion.save();
+        console.log(req.params.id);
         res.redirect('/');
     }
 });

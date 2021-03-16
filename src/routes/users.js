@@ -2,18 +2,18 @@ const express = require('express');
 const router = express.Router();
 const usuario = require('../models/Usuario');
 
-router.get('/users/signin', ((req, res) =>
+router.get('/signin', ((req, res) =>
             res.render('users/signin')));
 
-router.get('/users/account', ((req, res) =>
+router.get('/account', ((req, res) =>
     res.render('users/account')));
 
-router.post('/users/update', async (req, res) =>{
+router.post('/update', async (req, res) =>{
 
 });
 
 router.post('/users/Registro', async (req,res)=>{
-    const {nombre,apellido,correo,password, password2} = req.body;
+    const {nombre,apellido,correo,password, password2, numero, calle, colonia, cp, ciudad, estado} = req.body;
     const errors = [];
     if(!nombre){
         errors.push({text: 'Por favor escribe un nombre'});
@@ -42,19 +42,13 @@ router.post('/users/Registro', async (req,res)=>{
         });
     }
     else{
-        const numero = '';
-        const calle = '';
-        const colonia = '';
-        const cp = '';
-        const ciudad = '';
-        const estado = '';
-        const newUsuario = new usuario({nombre,apellido,correo, password, numero, calle,colonia, cp,ciudad,estado});
+        const newUsuario = new usuario({nombre, apellido, correo, password, numero, calle, colonia, cp, ciudad, estado});
         await newUsuario.save();
         console.log(newUsuario);
         res.redirect('/');
     }
 });
-router.get('/users/signup', ((req, res) =>
+router.get('/signup', ((req, res) =>
     res.render('users/signup')));
 
 module.exports = router;

@@ -2,13 +2,18 @@ const express = require('express');
 const router = express.Router();
 const Articulo = require('../models/Articulo');
 const multer = require('multer');
+const path = require('path');
 
 const storage = multer.diskStorage({
-    filename: (req, file, cb) => {
-        destination:'img',
-            cb(null, file.originalname);
+    destination: path.join(__dirname, '../public/img'),
+    filename : (req,file,cb)=>{
+        cb(null,file.originalname);
     }
 });
+const load = (multer({
+    storage : storage
+}).single('foto'));
+
 router.get('/articulos/view-articulo', ((req, res) =>
     res.render('articulos/view-articulo')))
 
@@ -31,9 +36,11 @@ router.get('/articulos/new-articulo', ((req, res) =>
     res.render('articulos/new-articulo')));
 
 
-router.post('/articulos/articulo-guardado', async (req, res) => {
-    const {nombre, precio, marca, descripcion, categoria, imagen} = req.body;
+router.post('/articulos/articulo-guardado', load ,async (req, res) => {
+    const {nombre, precio, marca, descripcion, categoria,foto} = req.body;
+
     const errors = [];
+
     if (!nombre) {
         errors.push({text: 'Por favor escribe un nombre.'});
     }
@@ -46,9 +53,9 @@ router.post('/articulos/articulo-guardado', async (req, res) => {
     if (!descripcion) {
         errors.push({text: 'Por favor escribe una descripcion.'});
     }
-    if (!imagen) {
-        errors.push({text: 'Por favor selecciona una imagen.'});
-    }
+    //if (!foto) {
+    //  errors.push({text: 'Por favor selecciona una imagen.'});
+    //}
     if (errors.length > 0) {
         res.render('articulos/new-articulo', {
             errors,
@@ -58,17 +65,12 @@ router.post('/articulos/articulo-guardado', async (req, res) => {
             descripcion
         });
     } else {
-
-        if (req.file) {
-            //res.json(req.file);
-            //const {filename} = req.file.filename;
-            console.log(imagen.filename);
-        }
-        //const newArticulo = new Articulo({nombre, descripcion, marca, precio, categoria, filename});
+        let fotoString = await String(path.join('..', 'public', 'img', req.file.originalname));
+        console.log(fotoString);
+        const newArticulo = new Articulo({nombre, descripcion, marca, categoria, precio, fotoString});
         //await newArticulo.save();
-        //console.log(newArticulo);
-        console.log(imagen.path);
-        res.redirect('/');
+        console.log(newArticulo);
+        res.render('articulos/new-articulo');
     }
 });
 module.exports = router;
