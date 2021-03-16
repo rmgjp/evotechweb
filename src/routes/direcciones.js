@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Usuario = require('../models/Usuario');
 
-router.get('/direcciones', (req, res) => {
+router.get('/direcciones/', (req, res) => {
     res.render('direcciones/new-direccion')
 });
 

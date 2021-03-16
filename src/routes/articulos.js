@@ -27,11 +27,6 @@ router.get('/producto/:id', async (req, res) => {
     res.render('articulos/view-articulo', {producto});
 });
 
-router.use(multer({
-    storage,
-    dest: 'img'
-}).single('imagen'));
-
 router.get('/articulos/new-articulo', ((req, res) =>
     res.render('articulos/new-articulo')));
 

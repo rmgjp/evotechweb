@@ -15,9 +15,5 @@ const ArticuloSchema = new Schema({
 
     imagen: {type: String, required: true}
 });
-/**
-ArticuloSchema.methods.setFoto = function.setFoto(filename){
-    this.foto = 'http://localhost:3000/public/img/${filename}';
-}*/
 
 module.exports = mongoose.model('Articulo', ArticuloSchema);
