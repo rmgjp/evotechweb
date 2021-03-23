@@ -3,6 +3,7 @@ const router = express.Router();
 const Articulo = require('../models/Articulo');
 const multer = require('multer');
 const path = require('path');
+const {isAuthenticated} = require('../helpers/auth');
 
 const storage = multer.diskStorage({
     destination: path.join(__dirname, '../public/img'),
@@ -32,7 +33,7 @@ router.get('/articulos/new-articulo', ((req, res) =>
 
 
 router.post('/articulos/articulo-guardado', load ,async (req, res) => {
-    const {nombre, precio, marca, descripcion, categoria,foto} = req.body;
+    const {nombre, precio, marca, descripcion, categoria, foto} = req.body;
 
     const errors = [];
 
@@ -62,7 +63,7 @@ router.post('/articulos/articulo-guardado', load ,async (req, res) => {
     } else {
         let fotoString = await String(path.join('..', 'public', 'img', req.file.originalname));
         console.log(fotoString);
-        const newArticulo = new Articulo({nombre, descripcion, marca, categoria, precio, fotoString});
+        const newArticulo = new Articulo({nombre, descripcion, marca, categoria, precio});
         //await newArticulo.save();
         console.log(newArticulo);
         res.render('articulos/new-articulo');

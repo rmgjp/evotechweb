@@ -5,11 +5,10 @@ const usuario = require('../models/Usuario');
 router.get('/signin', ((req, res) =>
             res.render('users/signin')));
 
-router.get('/account', ((req, res) =>
+router.get('/account/:id', isAuthenticated, ((req, res) =>
     res.render('users/account')));
 
 router.post('/update', async (req, res) =>{
-
 });
 
 router.post('/users/Registro', async (req,res)=>{
@@ -50,5 +49,8 @@ router.post('/users/Registro', async (req,res)=>{
 });
 router.get('/signup', ((req, res) =>
     res.render('users/signup')));
-
+router.get('/logout',(req,res)=>{
+    req.logout();
+    res.redirect("/");
+});
 module.exports = router;
