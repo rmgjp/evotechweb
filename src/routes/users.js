@@ -1,18 +1,26 @@
 const express = require('express');
 const router = express.Router();
 const usuario = require('../models/Usuario');
-
+const passport = require('passport');
+const { isAuthenticated } = require('../helpers/auth');
 router.get('/signin', ((req, res) =>
             res.render('users/signin')));
+
+router.post('/signin', passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/signin',
+    failureFlash: true
+}));
 
 router.get('/account/:id', isAuthenticated, ((req, res) =>
     res.render('users/account')));
 
+
 router.post('/update', async (req, res) =>{
 });
 
-router.post('/users/Registro', async (req,res)=>{
-    const {nombre,apellido,correo,password, password2, numero, calle, colonia, cp, ciudad, estado} = req.body;
+router.post('/signup', async (req,res)=>{
+    const {nombre,apellido,email,password, password2, numero, calle, colonia, cp, ciudad, estado} = req.body;
     const errors = [];
     if(!nombre){
         errors.push({text: 'Por favor escribe un nombre'});
@@ -20,7 +28,7 @@ router.post('/users/Registro', async (req,res)=>{
     if(!apellido){
         errors.push({text: 'Por favor escribe un apellido'});
     }
-    if(!correo){
+    if(!email){
         errors.push({text: 'Por favor escribe un correo'});
     }
     if(!password){
@@ -37,14 +45,29 @@ router.post('/users/Registro', async (req,res)=>{
            errors,
            nombre,
            apellido,
-           correo
+           email
         });
     }
     else{
-        const newUsuario = new usuario({nombre, apellido, correo, password, numero, calle, colonia, cp, ciudad, estado});
-        await newUsuario.save();
-        console.log(newUsuario);
-        res.redirect('/');
+        const correoUsuario = await usuario.findOne({email: email});
+        if(correoUsuario){
+            console.log("Correo existente");
+            errors.push({text: 'El correo ya esta asociado a una cuenta'});
+            res.render('users/signup',{
+                errors,
+                nombre,
+                apellido,
+                email
+            });
+        }
+        else {
+            const newUsuario = new usuario({nombre, apellido, email, password, numero, calle, colonia, cp, ciudad, estado});
+            newUsuario.password = await newUsuario.encryptPassword(password);
+            await newUsuario.save();
+            console.log(newUsuario);
+            res.redirect('/signin');
+        }
+
     }
 });
 router.get('/signup', ((req, res) =>

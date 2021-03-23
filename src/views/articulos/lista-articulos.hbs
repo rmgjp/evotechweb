@@ -1,0 +1,38 @@
+<div class="container g-2 p-2">
+    <div class="row">
+        {{#each articulos}}
+            <div class="col-md-3">
+                <div class="card" style="width: 18rem;">
+                    <div class="row align-content-end">
+                        <div class="col">
+                            <form action="/articulo/delete/{{_id}}?_method=DELETE" class="align-content-end" method='POST' enctype="multipart/form-data" novalidate>
+                                <input type = "hidden" name = "_method" value = "DELETE">
+                                <button class="btn btn-danger" type="submit" >X</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <img src="{{imagen}}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{precio}}</h5>
+                            <p class="card-text">{{nombre}}</p>
+                            <a class="btn btn-primary" href="/editar/producto/{{_id}}" >Editar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {{else}}
+            <div class="card" style="width: 18rem;">
+                <div class="row">
+                    <div class="card-body">
+                        <h5 class="card-title">No hay ningun articulo guardado.</h5>
+
+                        <a class="btn btn-primary" href='/articulos/new-articulo' >Nuevo articulo</a>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>
+

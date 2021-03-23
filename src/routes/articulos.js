@@ -23,12 +23,34 @@ router.get('/productos', async (req, res) => {
     res.render('articulos/all-articulos', {articulos});
 });
 
+router.get('/editar', isAuthenticated, async (req, res) => {
+    const articulos = await Articulo.find().lean();
+    res.render('articulos/lista-articulos', {articulos});
+});
+
 router.get('/producto/:id', async (req, res) => {
     const producto = await Articulo.findById(req.params.id).lean();
     res.render('articulos/view-articulo', {producto});
 });
 
-router.get('/articulos/new-articulo', ((req, res) =>
+router.get('/editar/producto/:id', isAuthenticated ,async (req, res) => {
+    const producto = await Articulo.findById(req.params.id).lean();
+    res.render('articulos/editar-articulo', {producto});
+});
+
+router.put('/articulos/articulo-editado/:id', async (req, res) =>{
+    const {nombre, descripcion, marca, categoria, precio} = req.body;
+    console.log({nombre, descripcion, marca, categoria, precio});
+    await Articulo.findByIdAndUpdate(req.params.id ,{nombre, descripcion, marca, categoria, precio});
+    res.redirect('/editar');
+});
+//ruta para borrar articulo
+router.delete('/articulo/delete/:id', async (req,res)=>{
+    await Articulo.findByIdAndDelete(req.params.id);
+    res.redirect('/editar');
+    console.log("Ok");
+});
+router.get('/articulos/new-articulo', isAuthenticated, ((req, res) =>
     res.render('articulos/new-articulo')));
 
 

@@ -16,8 +16,14 @@
 
             <a href="/" class="badge badge-primary text-md-end">Inicio</a>
             <a href="/productos" class="badge badge-primary text-md-end">Productos</a>
-            <a href="/account" class="badge badge-primary text-md-end">Mi cuenta</a>
 
+            {{# if user}}
+                <a href="/account/{{user._id}}" class="badge badge-primary text-md-end">Mi cuenta</a>
+                <a href="/logout" class="badge badge-primary text-md-end">Cerrar Sesión</a>
+            {{else}}
+                <a href="/signin" class="badge badge-primary text-md-end">Iniciar Sesión</a>
+                <a href="/signup" class="badge badge-primary text-md-end">Registrarse</a>
+            {{/if}}
             <form class="d-flex">
                 <input class="form-control me-2" type="search" placeholder="" aria-label="">
                 <button class="btn btn-secondary" type="submit">Buscar</button>
