@@ -11,9 +11,11 @@ const storage = multer.diskStorage({
         cb(null,file.originalname);
     }
 });
+
 const load = (multer({
     storage : storage
-}).single('foto'));
+}));
+
 
 router.get('/articulos/view-articulo', ((req, res) =>
     res.render('articulos/view-articulo')))
@@ -54,7 +56,7 @@ router.get('/articulos/new-articulo', isAuthenticated, ((req, res) =>
     res.render('articulos/new-articulo')));
 
 
-router.post('/articulos/articulo-guardado', load ,async (req, res) => {
+router.post('/articulos/new-articulo', load.single('foto'), async (req, res ) => {
     const {nombre, precio, marca, descripcion, categoria, foto} = req.body;
 
     const errors = [];
@@ -83,11 +85,17 @@ router.post('/articulos/articulo-guardado', load ,async (req, res) => {
             descripcion
         });
     } else {
-        let fotoString = await String(path.join('..', 'public', 'img', req.file.originalname));
-        console.log(fotoString);
-        const newArticulo = new Articulo({nombre, descripcion, marca, categoria, precio});
-        //await newArticulo.save();
-        console.log(newArticulo);
+        const newArticulo = new Articulo();
+        newArticulo.nombre = req.body.nombre;
+        newArticulo.precio = "MXN$" + req.body.precio;
+        newArticulo.marca = req.body.marca;
+        newArticulo.descripcion = req.body.descripcion;
+        newArticulo.categoria = req.body.categoria;
+        let file = req.file;
+        let pathArchivo = 'img/'+ file.originalname.toString();
+        newArticulo.imagen = pathArchivo;
+        await newArticulo.save();
+        //console.log(newArticulo);
         res.render('articulos/new-articulo');
     }
 });
