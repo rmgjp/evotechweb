@@ -3,6 +3,7 @@ const router = express.Router();
 const usuario = require('../models/Usuario');
 const passport = require('passport');
 const { isAuthenticated } = require('../helpers/auth');
+
 router.get('/signin', ((req, res) =>
             res.render('users/signin')));
 
@@ -12,11 +13,31 @@ router.post('/signin', passport.authenticate('local', {
     failureFlash: true
 }));
 
-router.get('/account/:id', isAuthenticated, ((req, res) =>
-    res.render('users/account')));
+router.get('/account/:id', isAuthenticated, async (req, res) =>{
+    const user = await usuario.findById(req.params.id).lean();
+    res.render('users/account', {user});
+});
 
-
-router.post('/update', async (req, res) =>{
+router.put('/update/:id', async (req, res) =>{
+    console.log("dentro del metodo put");
+    const {nombre, apellido, correo,  numero, calle, colonia, cp, ciudad, estado, newpassword, newpassword2} = req.body;
+    if(!newpassword && !newpassword2){
+        await usuario.findByIdAndUpdate(req.params.id, {nombre, apellido, correo, numero, calle, colonia, cp, ciudad, estado});
+        console.log("actualizando sin contraseña");
+        console.log(req.body);
+    }
+    else{
+        if(newpassword === newpassword2){
+            const Usuario = new usuario;
+            const password = await Usuario.encryptPassword(newpassword);
+            console.log(password);
+            if(await usuario.findByIdAndUpdate(req.params.id, {nombre, apellido, correo, password, numero, calle, colonia, cp, ciudad, estado})){
+                console.log("se actualizó la contraseña");
+            }
+            console.log(req.body);
+        }
+    }
+    res.redirect('/')
 });
 
 router.post('/signup', async (req,res)=>{
@@ -72,6 +93,7 @@ router.post('/signup', async (req,res)=>{
 });
 router.get('/signup', ((req, res) =>
     res.render('users/signup')));
+
 router.get('/logout',(req,res)=>{
     req.logout();
     res.redirect("/");

@@ -4,6 +4,7 @@ const Articulo = require('../models/Articulo');
 const multer = require('multer');
 const path = require('path');
 const {isAuthenticated} = require('../helpers/auth');
+const {hasAutorization} = require('../helpers/auth');
 
 const storage = multer.diskStorage({
     destination: path.join(__dirname, '../public/img'),
@@ -25,7 +26,7 @@ router.get('/productos', async (req, res) => {
     res.render('articulos/all-articulos', {articulos});
 });
 
-router.get('/editar', isAuthenticated, async (req, res) => {
+router.get('/editar', hasAutorization, async (req, res) => {
     const articulos = await Articulo.find().lean();
     res.render('articulos/lista-articulos', {articulos});
 });

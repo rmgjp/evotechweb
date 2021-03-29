@@ -58,7 +58,6 @@
                         <label for="cp">C.P.</label>
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="col">
                         <input type="text" class="form-control" name="ciudad" value = "{{user.ciudad}}" >
@@ -69,16 +68,10 @@
                         <label for="estado">Estado</label>
                     </div>
                 </div>
-
                 <div class="row">
                     <h2>Cambiar mi contraseña</h2>
                     <div class="dropdown-divider"></div>
                     <h6>Dejar en blanco si no se desea cambiar contraseña</h6>
-
-                </div>
-                <div class="row">
-                    <input type="password" class="form-control" name="actualpassword">
-                    <label for="actualpassword">Contraseña actual</label>
                 </div>
                 <div class="row">
                     <input type="password" class="form-control" name="newpassword">
@@ -88,8 +81,8 @@
                     <input type="password" class="form-control" name="newpassword2">
                     <label for="newpassword">Confirmar nueva contraseña</label>
                 </div>
-                <div class="row">
-                    <button type="button" class="btn btn-primary" action="submit">Guardar</button>
+                <div class="d-flex flex-row justify-content-end">
+                    <button class="btn btn-primary d-flex justify-content-start " type="submit">Guardar</button>
                 </div>
             </form>
         </div>
