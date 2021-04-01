@@ -94,7 +94,7 @@ router.post('/articulos/new-articulo', load.single('foto'), async (req, res ) =>
     } else {
         const newArticulo = new Articulo();
         newArticulo.nombre = req.body.nombre;
-        newArticulo.precio = "MXN$" + req.body.precio;
+        newArticulo.precio = req.body.precio;
         newArticulo.marca = req.body.marca;
         newArticulo.descripcion = req.body.descripcion;
         newArticulo.categoria = req.body.categoria;

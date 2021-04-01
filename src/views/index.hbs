@@ -158,7 +158,7 @@
                             <span class="visually-hidden">Toggle Dropright</span>
                         </button>
                         <ul class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Ver Todo</a>
+                            <a class="dropdown-item" href="/productos/44"></a>
                         </ul>
                     </div>
 
@@ -200,99 +200,18 @@
         <h3>
             Articulos Recomendados
         </h3>
-        <div class="col ">
-            <div class="card-group align-content-center">
-                <div class="col">
-                    <div class="card" style="width: 18rem;">
-                        <img src="img/ryzen.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">MXN$5,273.35</h5>
-                            <p class="card-text">AMD RYZEN 5 3600 6-Core 3.6 GHz (4.2 GHz Max Boost) Socket AM4 65W 100-100000031BOX Desktop Processor</p>
-                            <a href="articulo.html" class="btn btn-primary">Comprar</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card" style="width: 18rem;">
-                        <img src="img/asus.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">MXN$15,679.71 </h5>
-                            <p class="card-text">ASUS VivoBook 14 Laptop, 14" FHD, AMD Ryzen 7-3700U, AMD Radeon RX Vega 10 Graphics, 8 GB DDR4 RAM</p>
-                            <a href="articulo.html" class="btn btn-primary">Comprar</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card" style="width: 18rem;">
-                        <img src="img/corsair.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">MXN$4,056.51</h5>
-                            <p class="card-text">CORSAIR Hydro Series, H115i RGB PLATINUM, 280mm, 2 x ML PRO 140mm RGB PWM Fans, RGB Lighting & Fan Control w/ Software, Liquid CPU Cooler</p>
-                            <a href="articulo.html" class="btn btn-primary">Comprar</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card" style="width: 18rem;">
-                        <img src="img/Nh-d15.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">MXN$2,999.00</h5>
-                            <p class="card-text">Disipador para CPU Noctua NH-D15 chromax.black / 140mm x2 / Intel y AMD (Listo para AM4)</p>
-                            <a href="articulo.html" class="btn btn-primary">Comprar</a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <div class="row g-2 p-2">
-        <div class="col">
-            <div class="card-group align-content-center">
-                <div class="col">
-                    <div class="card" style="width: 18rem;">
-                        <img src="img/hdd.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">MXN$2,874.47</h5>
-                            <p class="card-text">WD Blue 3D NAND 1TB Internal SSD - SATA III 6Gb/s 2.5"/7mm Solid State Drive - WDS100T2B0A</p>
-                            <a href="articulo.html" class="btn btn-primary">Comprar</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card" style="width: 18rem;">
-                        <img src="img/asus%20TV.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">MXN$4,353.47 </h5>
-                            <p class="card-text">ASUS TUF Gaming VG24VQ 24" Full HD 1920 x 1080 1ms MPRT 144Hz 2 x HDMI</p>
-                            <a href="articulo.html" class="btn btn-primary">Comprar</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card" style="width: 18rem;">
-                        <img src="img/sdd.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">MXN$2,874.47</h5>
-                            <p class="card-text">Western Digital WD Blue SN550 NVMe M.2 2280 1TB PCI-Express 3.0 x4 3D NAND Internal Solid State Drive (SSD) WDS100T2B0C</p>
-                            <a href="articulo.html" class="btn btn-primary">Comprar</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card" style="width: 18rem;">
-                        <img src="img/mobo.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">MXN$$17,999.00</h5>
-                            <p class="card-text">Tarjeta Madre Gigabyte X570 AORUS XTREME AMD Ryzen 3ra Gen. AM4 ATX</p>
-                            <a href="articulo.html" class="btn btn-primary">Comprar</a>
-                        </div>
+        {{#each articulos}}
+            <div class="col-md-3">
+                <div class="card" style="width: 18rem;">
+                    <img src="../{{imagen}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">MXN{{precio}}</h5>
+                        <p class="card-text">{{nombre}}</p>
+                        <a class="btn btn-primary" href="/producto/{{_id}}" >Ver producto</a>
                     </div>
                 </div>
             </div>
-        </div>
+        {{/each}}
     </div>
 </div>
 
