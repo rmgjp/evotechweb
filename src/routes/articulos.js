@@ -26,6 +26,11 @@ router.get('/productos', async (req, res) => {
     res.render('articulos/all-articulos', {articulos});
 });
 
+router.get('/productos/:categoria', async (req, res) => {
+    const articulos = await Articulo.find({categoria:req.params.categoria}).lean();
+    res.render('articulos/all-articulos', {articulos});
+});
+
 router.get('/editar', hasAutorization, async (req, res) => {
     const articulos = await Articulo.find().lean();
     res.render('articulos/lista-articulos', {articulos});
@@ -33,7 +38,8 @@ router.get('/editar', hasAutorization, async (req, res) => {
 
 router.get('/producto/:id', async (req, res) => {
     const producto = await Articulo.findById(req.params.id).lean();
-    res.render('articulos/view-articulo', {producto});
+    const articulos = await Articulo.find({categoria:producto.categoria}).limit(4).lean();
+    res.render('articulos/view-articulo', {producto, articulos});
 });
 
 router.get('/editar/producto/:id', isAuthenticated ,async (req, res) => {

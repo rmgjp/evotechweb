@@ -1,6 +1,4 @@
-
 <div class="container">
-
     <div class="row g-2 p-2">
         <div class="col">
             <div class="card mb-3" >
@@ -14,57 +12,58 @@
                             <p class="card-text">{{producto.descripcion}}</p>
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">{{producto.precio}}</li>
+                            <li class="list-group-item">MXN${{producto.precio}}</li>
                         </ul>
                         <div class="card-body">
-                            <button type="button" class="btn btn-outline-primary">Añadir al carrito</button>
-                            <button type="button" class="btn btn-outline-secondary">Añadir a lista de deseo</button>
+                            <a type="button" class="btn btn-outline-primary carrito" titulo="{{producto.nombre}}" precio="{{producto.precio}}" role="button">Comprar</a>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <img src="../../img/PC-GAMER-WOLF.jpg">
                 </div>
             </div>
         </div>
     </div>
     <div class="row align-content-center">
         <h3>Articulos relacionados</h3>
-        <div class="col ">
-            <div class="card-group align-content-center">
-                <div class="col">
-                    <div class="card" style="width: 18rem;">
-                        <img src="../../img/ryzen.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">MXN$5,273.35</h5>
-                            <p class="card-text">AMD RYZEN 5 3600 6-Core 3.6 GHz (4.2 GHz Max Boost) Socket AM4 65W 100-100000031BOX Desktop Processor</p>
-                            <a href="#" class="btn btn-primary">Comprar</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card" style="width: 18rem;">
-                        <img src="../../img/asus.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">MXN$15,679.71 </h5>
-                            <p class="card-text">ASUS VivoBook 14 Laptop, 14" FHD, AMD Ryzen 7-3700U, AMD Radeon RX Vega 10 Graphics, 8 GB DDR4 RAM</p>
-                            <a href="#" class="btn btn-primary">Comprar</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card" style="width: 18rem;">
-                        <img src="../../img/corsair.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">MXN$4,056.51</h5>
-                            <p class="card-text">CORSAIR Hydro Series, H115i RGB PLATINUM, 280mm, 2 x ML PRO 140mm RGB PWM Fans, RGB Lighting & Fan Control w/ Software, Liquid CPU Cooler</p>
-                            <a href="#" class="btn btn-primary">Comprar</a>
-                        </div>
+        {{#each articulos}}
+            <div class="col-md-3">
+                <div class="card" style="width: 18rem;">
+                    <img src="../{{imagen}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">MXN${{precio}}</h5>
+                        <p class="card-text">{{nombre}}</p>
+                        <a class="btn btn-primary" href="/producto/{{_id}}" >Ver producto</a>
                     </div>
                 </div>
             </div>
-        </div>
+        {{/each}}
     </div>
 </div>
+    .carrito{}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/minicart/3.0.5/minicart.min.js"></script>
+<script>
+
+
+
+    paypal.minicart.render({
+        strings:{
+            button:'Pagar',
+            buttonAlt:'Total',
+            subtotal: " Total:",
+            empty:'No hay productos en el carrito.'
+        }
+    });
+
+    $('.carrito').click(function (e){
+        e.stopPropagation();
+        paypal.minicart.cart.add({
+            business: 'evotech@gmail.com',
+            item_name: $(this).attr("titulo"),
+            amount: $(this).attr("precio"),
+            currency_code: 'MXN'
+        });
+    });
+
+</script>
 </body>
 </html>

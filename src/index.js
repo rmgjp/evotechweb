@@ -7,8 +7,11 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
 
+
 //inicializaciones
 const app = express();
+
+
 
 require('./database');
 require('./config/passport');
@@ -21,12 +24,20 @@ app.use('/js', express.static(path.join(__dirname, 'node_modules/jquery/dist')))
 //settings
 app.set('port',process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
+
+
+
+
 app.engine('.hbs', exphbs({
     defaultLayout: 'main',
     layoutsDir: path.join(app.set('views'), 'layouts'),
     partialsDir: path.join(app.get('views'), 'partials'),
+    helpers: require('./helpers/helperhbs'),
     extname: '.hbs'
 }));
+
+
+
 app.set('view engine', '.hbs');
 //middlewares
 app.use(express.urlencoded({extended : false}));
@@ -41,6 +52,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
+
+
 //Global variables
 app.use((req, res, next) =>{
     res.locals.success_msg = req.flash("success_msg");
@@ -50,13 +63,13 @@ app.use((req, res, next) =>{
     next();
 });
 
+
 //Routes
 
 //mas rutas...
 app.use(require('./routes/index'));
 //app.use(require('./img/'));
 app.use(require('./routes/users'));
-app.use(require('./routes/pagos'));
 app.use(require('./routes/articulos'));
 //app.use(require('./routes/direcciones'));
 

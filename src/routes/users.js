@@ -7,11 +7,14 @@ const { isAuthenticated } = require('../helpers/auth');
 router.get('/signin', ((req, res) =>
             res.render('users/signin')));
 
+
+
 router.post('/signin', passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/signin',
     failureFlash: true
-}));
+}))
+
 
 router.get('/account/:id', isAuthenticated, async (req, res) =>{
     const user = await usuario.findById(req.params.id).lean();
