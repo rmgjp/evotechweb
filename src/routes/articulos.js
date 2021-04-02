@@ -36,7 +36,7 @@ router.get('/editar', hasAutorization, async (req, res) => {
     res.render('articulos/lista-articulos', {articulos});
 });
 
-router.post('/producto/comprar/:id', async (req, res) => {
+router.post('/comprar/:id', async (req, res) => {
     const producto = await Articulo.findById(req.params.id).lean();
     res.render('articulos/compra-articulo', {producto});
 });
