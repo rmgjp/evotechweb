@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="row g-2 p-2">
+        <h2>Gracias por tu preferencia</h2>
+        <h3>Articulo comprado</h3>
+        <div class="col">
+            <div class="card mb-3" >
+                <div class="row g-0">
+                    <div class="col">
+                        <img src="../{{producto.imagen}}" class="card-img-top w-75" alt="...">
+                    </div>
+                    <div class="col">
+                        <div class="card-body">
+                            <h5 class="card-title">{{producto.nombre}}</h5>
+                            <p class="card-text">{{producto.descripcion}}</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Total</li>
+                            <li class="list-group-item">MXN${{producto.precio}}</li>
+                        </ul>
+                        <div class="card-body">
+                            <a href="/" type="button" class="btn btn-outline-primary" role="button">Seguir comprando</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

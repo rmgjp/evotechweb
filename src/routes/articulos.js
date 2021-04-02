@@ -36,6 +36,11 @@ router.get('/editar', hasAutorization, async (req, res) => {
     res.render('articulos/lista-articulos', {articulos});
 });
 
+router.post('/producto/comprar/:id', async (req, res) => {
+    const producto = await Articulo.findById(req.params.id).lean();
+    res.render('articulos/compra-articulo', {producto});
+});
+
 router.get('/producto/:id', async (req, res) => {
     const producto = await Articulo.findById(req.params.id).lean();
     const articulos = await Articulo.find({categoria:producto.categoria}).limit(4).lean();

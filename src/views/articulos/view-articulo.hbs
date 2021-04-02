@@ -1,25 +1,27 @@
 <div class="container">
     <div class="row g-2 p-2">
         <div class="col">
-            <div class="card mb-3" >
-                <div class="row g-0">
-                    <div class="col">
-                        <img src="../{{producto.imagen}}" class="card-img-top w-75" alt="...">
-                    </div>
-                    <div class="col">
-                        <div class="card-body">
-                            <h5 class="card-title">{{producto.nombre}}</h5>
-                            <p class="card-text">{{producto.descripcion}}</p>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">MXN${{producto.precio}}</li>
-                        </ul>
-                        <div class="card-body">
-                            <a type="button" class="btn btn-outline-primary carrito" titulo="{{producto.nombre}}" precio="{{producto.precio}}" role="button">Comprar</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+           <form action="/producto/comprar/{{producto._id}}" method='POST' enctype="multipart/form-data" novalidate >
+               <div class="card mb-3" >
+                   <div class="row g-0">
+                       <div class="col">
+                           <img src="../{{producto.imagen}}" class="card-img-top w-75" alt="...">
+                       </div>
+                       <div class="col">
+                           <div class="card-body">
+                               <h5 class="card-title">{{producto.nombre}}</h5>
+                               <p class="card-text">{{producto.descripcion}}</p>
+                           </div>
+                           <ul class="list-group list-group-flush">
+                               <li class="list-group-item">MXN${{producto.precio}}</li>
+                           </ul>
+                           <div class="card-body">
+                               <button class="btn btn-outline-primary" type="submit">Comprar</button>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </form>
         </div>
     </div>
     <div class="row align-content-center">
