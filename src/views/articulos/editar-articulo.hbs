@@ -1,0 +1,69 @@
+{{#each errors}}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{text}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{{/each}}
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar Articulo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <!--Barra de busqueda -->
+</head>
+
+<body>
+<div class="container g-2 p-2 d-flex justify-content-center  align-items-center" >
+    <div class="card w-75 shadow-sm" >
+        <div class="row g-2 p-2">
+            <h2>Editar Articulo</h2>
+        </div>
+        <form class="row g-3 needs-validation" action='/articulos/articulo-editado/{{producto._id}}?_method=PUT' method='POST'>
+            <input type = "hidden" name = "_method" value="PUT">
+            <div class="row g-2 p-2">
+                <div class="col">
+                    <div class="mb-3">
+                        <label for="Nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" name="nombre" value="{{producto.nombre}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Precio" class="form-label">Precio</label>
+                        <input type="text" class="form-control" name="precio" value="{{producto.precio}}">
+                    </div>
+                    <div class="mb-3">
+
+                        <label for="categoria" class="form-label">Categoría</label>
+                        <select class="form-select" name="categoria" value={{producto.categoria}}>
+                            <option value="1">CPU</option>
+                            <option value="2">Teclados</option>
+                            <option value="3">GPU</option>
+                            <option value="4">CPU Cooler</option>
+                            <option value="5">Laptop</option>
+                            <option value="6">SSD</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="mb-3">
+                        <label for="Descripción" class="form-label">Descripción</label>
+                        <input type="text" class="form-control" name="descripcion" value="{{producto.descripcion}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Marca" class="form-label">Marca</label>
+                        <input type="text" class="form-control" name="marca" value="{{producto.marca}}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Imagen</label>
+                        <input class="form-control" type="file"  accept="image/*" name="foto">
+                    </div>
+
+                </div>
+                <div class="d-flex flex-row justify-content-end">
+                    <button class="btn btn-primary d-flex justify-content-start " type="submit">Guardar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+
